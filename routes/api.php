@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\BookController;
+use App\Http\Controllers\API\ElasticSearchController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
@@ -33,4 +34,8 @@ Route::middleware('auth:sanctum')->controller(BookController::class)->group(func
     Route::delete('delete_book', 'deleteBook')->name('delete.book');
 
     Route::post('sign-out', [AuthController::class, 'signOut'])->name('logout');
+});
+
+Route::prefix('elasticsearch')->controller(ElasticSearchController::class)->group(function (){
+    Route::get('books','getBooks')->name('elasticsearch.books');
 });
